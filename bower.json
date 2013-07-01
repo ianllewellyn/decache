@@ -7,7 +7,7 @@
     "node_modules",
     "components",
     "src",
-    "text",
+    "test",
     "package.json",
     "cakefile"
   ],
