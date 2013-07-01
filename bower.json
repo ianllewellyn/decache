@@ -5,6 +5,12 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "components"
-  ]
+    "components",
+    "src",
+    "text",
+    "package.json",
+    "cakefile"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
 }
