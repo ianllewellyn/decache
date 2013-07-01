@@ -1,0 +1,36 @@
+{
+  "name": "decache",
+  "version": "0.0.1",
+  "description": "Simple lib for adding a timestamp to a url to break browser cache.",
+  "main": "decache.js",
+  "scripts": {
+    "build": "coffee -c -o lib/ src/",
+    "test": "cake test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ianllewellyn/decache.git"
+  },
+  "license": "",
+  "engines": {
+    "node": "~0.6.10 || 0.8 || 0.9"
+  },
+  "keywords": [
+    "decache"
+  ],
+  "author": "ianllewellyn",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "2a651c08e74effdb85a0190b42eea2b410b2d090",
+  "dependencies": {},
+  "devDependencies": {
+    "coffee-script": "~1.4.0",
+    "mocha": "~1.5.0",
+    "chai": "~1.1.0",
+    "sinon": "~1.4.2",
+    "sinon-chai": "~2.1.2",
+    "hashish": "~0.0.4",
+    "match-files": "~0.1.1",
+    "sandboxed-module": "~0.1.4"
+  }
+}

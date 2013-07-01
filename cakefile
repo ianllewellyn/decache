@@ -1,0 +1,42 @@
+'use strict'
+hashish = require 'hashish'
+child_process = require 'child_process'
+MatchFiles = require 'match-files'
+
+# Create a filter method for matching filenames
+filterFactory = (patternString)->
+	matchPattern = new RegExp patternString, 'i'
+	filterMethod = (aFile)->
+		aFile.match matchPattern
+	return filterMethod
+
+# search the test folder for test files. Returned as an array to the callback
+# function
+findTestFiles = (patterns..., callback)->
+	testMatchers = [filterFactory ".+_test\\.coffee$"]
+	extraPatterns = filterFactory(pattern) for pattern in patterns
+	testMatchers = testMatchers.concat extraPatterns if extraPatterns?.length
+	MatchFiles.find './test', {
+		fileFilters: testMatchers
+	}, callback
+
+# Command line options
+option '-f', '--filter [REGEXP]', 'provide a regex pattern to filter available test files' 
+option '-w', '--watch', 'Watch files for changes and retest'
+option '-r', '--reporter [STRING]', 'mocha report format. Defaults to min'
+
+runTests = (files, testOptions...)->
+	mochaEnv = hashish.merge process.env, { NODE_ENV: 'test' }
+	# create the test process
+	testProcess = child_process.spawn "./node_modules/.bin/mocha", files.concat(testOptions), { env: mochaEnv }
+	testProcess.stdout.pipe process.stdout
+	testProcess.stderr.pipe process.stderr
+
+task 'test', 'run tests', (options)->
+	# console.log options
+	findTestFiles options.filter, (err, files)->
+		# build the options and environment variables to pass to mocha
+		mochaOpts = [files]
+		# mochaOpts = mochaOpts.concat '--watch' if options.watch?
+		# mochaOpts = mochaOpts.concat ['--reporter', options.reporter] if options.reporter?
+		runTests.apply this, mochaOpts

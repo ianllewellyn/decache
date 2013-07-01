@@ -1,0 +1,5 @@
+--growl
+--compilers coffee:coffee-script
+--require test/test_helpers.coffee
+--reporter dot
+--colors
