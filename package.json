@@ -1,6 +1,6 @@
 {
   "name": "decache",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple lib for adding a timestamp to a url to break browser cache.",
   "main": "decache.js",
   "scripts": {
